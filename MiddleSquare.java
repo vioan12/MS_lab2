@@ -1,27 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package ms_lab2;
-
 /**
- *
- * @author Asus
+ * Created by ioan on 10/17/17.
  */
-public class MiddleSquare implements Generator 
-{
+public class MiddleSquare implements Generator {
     private int seed;
     private int n_seed;
-    
+
     MiddleSquare(int valueofseed)
     {
         setseedvalue(valueofseed);
         setn_seedvalue(numberdigits(seedvalue()));
     }
 
-    @Override
-    public float next() 
+
+    public float next()
     {
         int x;
         x=generatenextnumber(seed,n_seed);
@@ -30,23 +21,23 @@ public class MiddleSquare implements Generator
         return x/(float)Math.pow(10,n_seed);
     }
 
-    @Override
-    public int seedvalue() 
+
+    public int seedvalue()
     {
         return this.seed;
     }
-    
+
     private void setseedvalue(int value)
     {
         this.seed=value;
     }
-    
+
     private void setn_seedvalue(int value)
     {
         this.n_seed=value;
     }
-    
-    private int numberdigits(int x)       
+
+    private int numberdigits(int x)
     {
         int n;
         n=0;
@@ -56,7 +47,7 @@ public class MiddleSquare implements Generator
         }
         return n;
     }
-    
+
     private int generatenextnumber(int tempseed,int tempn_seed)
     {
         int x;
@@ -65,18 +56,28 @@ public class MiddleSquare implements Generator
         x=x%(int)Math.pow(10,tempn_seed);
         return x;
     }
-    
+
+    public int reversenumber(int number)
+    {
+        int x=0;
+        while(number!=0){
+            x=x*10+number%10;
+            number=number/10;
+        }
+        return x;
+    }
+
     private int testnumber(int x)
     {
         if(x==0){
-            x=x;
+            x=reversenumber(seed);
         }
         while(numberdigits(x)!=n_seed){
             x=x*10;
         }
         if(seed==generatenextnumber(x,n_seed)){
-            x=x+1;           
+            x=x+1;
         }
-        return x;        
-    }        
+        return x;
+    }
 }
